@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Contacts</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Contacts</h1>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email Address</th>
+      <th>Notes</th>
+    </tr>
+    <% contacts.forEach(contact => { %>
+      <tr>
+        <td><%= contact.name %></td>
+        <td><%= contact.email %></td>
+        <td>
+          <form action="/save-note" method="POST">
+            <input type="hidden" name="email" value="<%= contact.email %>">
+            <textarea name="note" onblur="this.form.submit()"><%= contact.note %></textarea>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
